@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicAPI", "DynamicAPI\DynamicAPI.csproj", "{DE01767F-5EAE-4B8E-AAF5-707D07FBE0D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainApplication", "MainApplication\MainApplication.csproj", "{39A99D9E-EAE1-45A0-BFC7-B58C08C0A005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlWebParser", "HtmlWebParser\HtmlWebParser.csproj", "{C0FE47DA-A9F2-4215-AE5D-5EB0145D1394}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE01767F-5EAE-4B8E-AAF5-707D07FBE0D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE01767F-5EAE-4B8E-AAF5-707D07FBE0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE01767F-5EAE-4B8E-AAF5-707D07FBE0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE01767F-5EAE-4B8E-AAF5-707D07FBE0D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39A99D9E-EAE1-45A0-BFC7-B58C08C0A005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39A99D9E-EAE1-45A0-BFC7-B58C08C0A005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39A99D9E-EAE1-45A0-BFC7-B58C08C0A005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39A99D9E-EAE1-45A0-BFC7-B58C08C0A005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FE47DA-A9F2-4215-AE5D-5EB0145D1394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FE47DA-A9F2-4215-AE5D-5EB0145D1394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FE47DA-A9F2-4215-AE5D-5EB0145D1394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FE47DA-A9F2-4215-AE5D-5EB0145D1394}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,212 @@
+﻿using HtmlWebParser.Entities;
+using System;
+using System.Collections.Generic;
+
+namespace HtmlWebParser.Services.Old
+{
+    public class HtmlParser
+    {
+        private readonly char[] Content;
+        /// <summary>
+        /// Injects the HTML content to the HTMLParser
+        /// </summary>
+        /// <param name="Content">HTML Content in string fomat</param>
+        public HtmlParser(string Content)
+        {
+            Content.Replace(System.Environment.NewLine, "");
+            this.Content = Content.ToCharArray();
+        }
+        private List<HtmlObject> Analyze()
+        {
+            //Get last closing tag of file
+            int endOfFile = Content.Length - 1;
+            for (int i = Content.Length - 1; i >= 0; i--)
+            {
+                if (Content[i].Equals('>'))
+                {
+                    endOfFile = i;
+                    break;
+                }
+            }
+            List<HtmlObject> HtmlObjectsList = new List<HtmlObject>();
+            //int depth = 0;  //Represents depth in the tree of Tags
+            HtmlObject htmlTag = new HtmlObject();
+            bool inBetweenContentAfterClosedTagFound = false;
+            string inBetweenContentAfterClosedTag = "";
+            for (int i = 0; i < endOfFile - 1; i++)
+
+            {
+                String display = Content[i].ToString();// + Content[i + 1].ToString() + Content[i + 2].ToString() + Content[i + 3].ToString() + Content[i + 4].ToString() + Content[i + 5].ToString() + Content[i + 6].ToString();
+
+                switch (Content[i])
+                {
+                    case '<':
+                        //Comment check
+                        switch (Content[i + 1])
+                        {
+
+                            case char c when (Char.IsLetter(c)):
+                                {
+                                    //move one point forward cause right now it shows "<"
+                                    i++;
+                                    //before going ahead and creating a new tag add the previous one to the list
+                                    //if we found a new tag the old one was probably added
+                                    if (htmlTag.Name != "")
+                                    {
+                                        HtmlObjectsList.Add(htmlTag);
+                                        htmlTag = new HtmlObject();
+                                    }
+                                    htmlTag.type = HtmlObjectType.OpeningTag;
+                                    string OpeningtagName = "";
+
+                                    while (!(Content[i].Equals('>') || Content[i].Equals(' ') || Content[i].Equals('/')))
+                                    {
+                                        OpeningtagName += Content[i].ToString();
+                                        i++;
+                                    }
+
+                                    //if (Content[i].Equals('/'))//Self closing tag
+                                    //    htmlTag.type = HtmlObjectType.SelfClosingTag;
+                                    //Reduce i by one because for will increase it by one again skipping a character
+                                    i--;
+                                    htmlTag.Name = OpeningtagName;
+                                }
+                                break;
+                            case '/':
+                                //move one point forward cause right now it shows "<"
+                                i += 2;
+                                if (htmlTag.Name != "")
+                                {
+                                    HtmlObjectsList.Add(htmlTag);
+                                    htmlTag = new HtmlObject();
+                                }
+                                htmlTag.type = HtmlObjectType.ClosingTag;
+                                string ClosingtagName = "";
+
+                                while (!(Content[i].Equals('>') || Content[i].Equals(' ')))
+                                {
+                                    ClosingtagName += Content[i].ToString();
+                                    i++;
+                                }
+                                i--;
+                                htmlTag.Name = ClosingtagName;
+                                break;
+                        }
+                        break;
+                    //Closing tag check for example </p>
+
+
+                    //Create a case for the content inside <p>Hello</p>
+                    case '>':
+                        {
+                            if (htmlTag.type == HtmlObjectType.OpeningTag)
+                            {
+                                if (Content[i - 1].Equals('/'))//Not corect : it works if it is like this "/>" but what if spaces exist inbetween like "/ >"
+                                {
+                                    htmlTag.type = HtmlObjectType.SelfClosingTag;
+                                }
+                                else
+                                {
+                                    //Skip the ">" sign
+                                    i++;
+                                    string propertyName = "InBetweenContent";
+                                    string propertyContent = "";
+
+                                    bool exitFlag = false;
+                                    while (!((string)Content[i].ToString() + (string)Content[i + 1].ToString()).Equals("</") && !exitFlag)
+                                    {
+
+                                        propertyContent += this.Content[i];
+                                        if (Content[i].Equals('<') && propertyContent.Trim().Equals("<"))
+                                        {
+                                            exitFlag = true;
+                                        }
+                                        else
+                                            i++;
+                                    }
+                                    i--;
+                                    if (!exitFlag)
+                                        htmlTag.Properties.Add(propertyName, propertyContent);
+                                }
+                            }
+                        }
+                        break;
+
+                    //If empty skip
+                    case ' ':
+                        break;
+                    //We are probably(?) reading a property
+                    case char c when (Char.IsLetter(c)):
+                        {
+
+                            if (htmlTag.type == HtmlObjectType.OpeningTag)
+                            {
+                                string propertyName = "";
+                                string propertyContent = "";
+
+                                while (i < endOfFile && !Content[i].Equals('='))
+                                {
+                                    propertyName += this.Content[i];
+                                    i++;
+                                }
+                                while (i < endOfFile && !Content[i].Equals('"'))
+                                {
+                                    i++;
+                                }
+                                i++;
+                                while (i < endOfFile && !Content[i].Equals('"'))
+                                {
+                                    propertyContent += this.Content[i];
+                                    i++;
+                                }
+                                while (i < endOfFile & !Content[i].Equals('>') && (Content[i].Equals(' ') || Content[i].Equals('/')))
+                                {
+                                    if (Content[i].Equals('/'))//Self closing tag
+                                        htmlTag.type = HtmlObjectType.SelfClosingTag;
+                                    i++;
+                                }
+                                i--;
+                            }
+                            //else
+                            //if (htmlTag.type == HtmlObjectType.OpeningTag)//IF the tag is an openingTag then it is the casual scenario <p>Hello</p>
+                            //{
+                            //    htmlTag.Properties.Add(propertyName, propertyContent + '"');
+                            //}
+                            //else  //If not though it means we are in a case like this one <a><i></i>Computing</a> further processing is needed in the creation of the next tag
+                            //{
+                            //    //inBetweenContentAfterClosedTagFound = true;
+                            //    //inBetweenContentAfterClosedTag = propertyContent;
+                            //}
+                            //}
+                            //else
+                            //{
+                            //    if (htmlTag.Name != "")
+                            //    {
+                            //        HtmlObjectsList.Add(htmlTag);
+                            //        htmlTag = new HtmlObject();
+                            //    }
+                            //    //this is not a property but an Inbetween content after a closedtag  for example : "<a><i></i>Computing</a>"
+                            //    for (int k = HtmlObjectsList.Count - 1; k > 0; k--)
+                            //    {
+                            //        HtmlObject obj = HtmlObjectsList[i]
+                            //       if (obj.Name.Equals)
+                            //    }
+                            //}
+                        }
+                        break;
+
+                }
+
+                //the last tag is never added
+
+            }
+            HtmlObjectsList.Add(htmlTag);
+            return HtmlObjectsList;
+        }
+
+        public List<HtmlObject> Result()
+        {
+            return Analyze();
+        }
+    }
+}
