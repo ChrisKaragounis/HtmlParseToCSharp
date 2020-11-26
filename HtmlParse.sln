@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicAPI", "DynamicAPI\DynamicAPI.csproj", "{DE01767F-5EAE-4B8E-AAF5-707D07FBE0D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicAPI", "DynamicAPI\DynamicAPI.csproj", "{DE01767F-5EAE-4B8E-AAF5-707D07FBE0D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainApplication", "MainApplication\MainApplication.csproj", "{39A99D9E-EAE1-45A0-BFC7-B58C08C0A005}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainApplication", "MainApplication\MainApplication.csproj", "{39A99D9E-EAE1-45A0-BFC7-B58C08C0A005}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlWebParser", "HtmlWebParser\HtmlWebParser.csproj", "{C0FE47DA-A9F2-4215-AE5D-5EB0145D1394}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlWebParser", "HtmlWebParser\HtmlWebParser.csproj", "{C0FE47DA-A9F2-4215-AE5D-5EB0145D1394}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F001C753-92E6-44E6-ACC3-C88D46ADDC8C}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Desktop\README.md = ..\..\Desktop\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +35,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF655A7C-C92D-4868-A18B-5967A8A68991}
 	EndGlobalSection
 EndGlobal
