@@ -1,26 +1,25 @@
-﻿using HtmlWebParser.Entities;
+﻿using System;
+using HtmlWebParser.Entities;
 using HtmlWebParser.Services;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
 
 namespace MainApplication
 {
     internal class StartUp
     {
-        static public void Start()
+        public static void Start()
         {
-            string content = ContentProvider.getContentAsync();
+            string content = ContentProvider.GetContent();
             HtmlParser parser = new HtmlParser(content);
-            List<HtmlObject> Webpage = parser.Parse();
-            using (System.IO.StreamWriter file =
-           new System.IO.StreamWriter(@"D:\Users\Christos\Downloads\Compressed\WriteLines2.html", false))
-            {
-                foreach (HtmlObject htmlObject in Webpage)
-                {
-                    file.Write(htmlObject.ToString());
-                }
-            }
-            //parser = new HtmlParser("<p>hello</p>");
-            //Webpage = (List<HtmlObject>)parser.Result();
+            Webpage webpage = parser.Parse();
+            //using System.IO.StreamWriter file =
+            //    new System.IO.StreamWriter(@"D:\Users\Christos\Downloads\Compressed\WriteLines2.html", false);
+            //foreach (HtmlObject htmlObject in webpage)
+            //{
+            //    file.Write(htmlObject.ToString());
+            //}
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using HtmlWebParser.Entities;
 using System;
-using System.Collections.Generic;
 
 namespace HtmlWebParser.Services
 {
@@ -14,13 +13,13 @@ namespace HtmlWebParser.Services
         /// <param name="content">HTML Content in string fomat</param>
         public HtmlParser(string content)
         {
-            content.Replace(System.Environment.NewLine, "");
+            //content.Replace(System.Environment.NewLine, "");
             this._content = content.ToCharArray();
         }
 
-        private List<HtmlObject> Analyze()
+        private Webpage Analyze()
         {
-            List<HtmlObject> HtmlObjectsList = new List<HtmlObject>();
+            Webpage _webpage = new Webpage();
             int endOfFile = GetEndOfFile();
             HtmlObject htmlTag = new HtmlObject();
             bool inBetweenContentAfterClosedTagFound = false;
@@ -53,7 +52,7 @@ namespace HtmlWebParser.Services
                                 {
                                     if (htmlTag.Name != "")
                                     {
-                                        HtmlObjectsList.Add(htmlTag);
+                                        _webpage.Add(htmlTag);
                                         htmlTag = new HtmlObject();
                                     }
                                     Tuple<int, HtmlObject> values = GetOpeningTagName(i);
@@ -61,10 +60,17 @@ namespace HtmlWebParser.Services
                                     i = values.Item1;
                                     if (inBetweenContentAfterClosedTagFound)
                                     {
-                                        int result = GetInBetweenContentParent(HtmlObjectsList, htmlTag);
+                                        int result = GetInBetweenContentParent(_webpage, htmlTag);
                                         if (result > 0)
                                         {
-                                            HtmlObjectsList[result].Properties.Add("InBetweenContent", inBetweenContentAfterClosedTag);
+                                            try
+                                            {
+                                                _webpage[result].Properties.Add("InBetweenContent", inBetweenContentAfterClosedTag);
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Console.WriteLine(e);
+                                            }
                                         }
                                         inBetweenContentAfterClosedTagFound = false;
                                     }
@@ -75,21 +81,21 @@ namespace HtmlWebParser.Services
                                 {
                                     if (htmlTag.Name != "")
                                     {
-                                        HtmlObjectsList.Add(htmlTag);
-                                        htmlTag = new HtmlObject();
+                                        _webpage.Add(htmlTag);
                                     }
-                                    Tuple<int, HtmlObject> values = GetClosingTagName(++i);
-                                    htmlTag = values.Item2;
+                                    Tuple<int, string> values = GetClosingTagName(++i);
+                                    htmlTag = new HtmlObject(values.Item2,HtmlObjectType.ClosingTag);
                                     i = values.Item1;
 
                                     if (inBetweenContentAfterClosedTagFound)
                                     {
-                                        int result = GetInBetweenContentParent(HtmlObjectsList, htmlTag);
+                                        int result = GetInBetweenContentParent(_webpage, htmlTag);
                                         if (result > 0)
                                         {
+                                            HtmlObject obj = _webpage[result];
                                             try
                                             {
-                                                HtmlObjectsList[result].Properties.Add("InBetweenContent", inBetweenContentAfterClosedTag);
+                                                _webpage[result].Properties.Add("InBetweenContent", inBetweenContentAfterClosedTag);
                                             }
                                             catch (Exception e)
                                             {
@@ -105,18 +111,21 @@ namespace HtmlWebParser.Services
                     //Create a case for the content inside <p>Hello</p>
                     case '>':
                         {
-                            if (htmlTag.type == HtmlObjectType.OpeningTag)
+                            if (htmlTag.Type == HtmlObjectType.OpeningTag)
                             {
-                                Tuple<int, HtmlObject> values = GetInBetweenContent(i, endOfFile, htmlTag);
+                                Tuple<int, string> values = GetInBetweenContent(i, endOfFile, htmlTag);
+                                if (!String.IsNullOrWhiteSpace(values.Item2))
+                                {
+                                    htmlTag.Properties.Add("InBetweenContent", values.Item2);
+                                }
                                 i = values.Item1;
-                                htmlTag = values.Item2;
                             }
                         }
                         break;
                     //We are probably(?) reading a property
-                    case Char c when (Char.IsLetter(c)):
+                    case { } c when (Char.IsLetter(c)):
                         {
-                            if (htmlTag.type == HtmlObjectType.OpeningTag)
+                            if (htmlTag.Type == HtmlObjectType.OpeningTag)
                             {
                                 Tuple<int, HtmlObject> values = GetProperties(i, endOfFile, htmlTag);
                                 i = values.Item1;
@@ -126,9 +135,12 @@ namespace HtmlWebParser.Services
                             {
                                 // Temporary solution for skipping characters (i--)
                                 i--;
-                                Tuple<int, HtmlObject> values = GetInBetweenContent(i, endOfFile, new HtmlObject());
-                                inBetweenContentAfterClosedTagFound = true;
-                                inBetweenContentAfterClosedTag = values.Item2.Properties["InBetweenContent"];
+                                Tuple<int, string> values = GetInBetweenContent(i, endOfFile);
+                                if (!String.IsNullOrWhiteSpace(values.Item2))
+                                {
+                                    inBetweenContentAfterClosedTagFound = true;
+                                    inBetweenContentAfterClosedTag = values.Item2;
+                                }
                                 i = values.Item1;
                             }
                         }
@@ -136,8 +148,8 @@ namespace HtmlWebParser.Services
                 }
             }
             if (!htmlTag.Name.Equals(""))
-                HtmlObjectsList.Add(htmlTag);
-            return HtmlObjectsList;
+                _webpage.Add(htmlTag);
+            return _webpage;
         }
     }
 }
