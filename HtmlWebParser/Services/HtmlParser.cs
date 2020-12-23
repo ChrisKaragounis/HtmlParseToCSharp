@@ -84,7 +84,7 @@ namespace HtmlWebParser.Services
                                         _webpage.Add(htmlTag);
                                     }
                                     Tuple<int, string> values = GetClosingTagName(++i);
-                                    htmlTag = new HtmlObject(values.Item2,HtmlObjectType.ClosingTag);
+                                    htmlTag = new HtmlObject(values.Item2, HtmlObjectType.ClosingTag);
                                     i = values.Item1;
 
                                     if (inBetweenContentAfterClosedTagFound)

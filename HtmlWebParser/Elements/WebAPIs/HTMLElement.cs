@@ -1,4 +1,5 @@
-﻿using HtmlWebParser.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using HtmlWebParser.Entities;
 
 namespace HtmlWebParser.Elements
 {

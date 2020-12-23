@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using HtmlWebParser.Elements.WebAPIs;
+﻿using HtmlWebParser.Elements.WebAPIs;
 using HtmlWebParser.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace HtmlWebParser.Elements.BlockElements
 {
     /// <summary>
     /// Unordered List
     /// </summary>
-    class UL :HTMLUListElement
+    internal class UL : HTMLUListElement
     {
         public new readonly string TagName = "ul";
 
@@ -18,6 +15,7 @@ namespace HtmlWebParser.Elements.BlockElements
         /// This attribute sets the bullet style for the list.
         /// </summary>
         public string type;
+
         /// <summary>
         /// This Boolean attribute hints that the list should be rendered in a compact style. The interpretation of this attribute depends on the user agent, and it doesn't work in all browsers.
         /// </summary>
@@ -34,6 +32,7 @@ namespace HtmlWebParser.Elements.BlockElements
                     case "type":
                         type = value;
                         break;
+
                     case "compact":
                         compact = value;
                         break;

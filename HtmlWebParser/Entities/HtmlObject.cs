@@ -1,10 +1,10 @@
 ﻿using HtmlWebParser.Elements;
 using HtmlWebParser.Elements.BlockElements;
 using HtmlWebParser.Elements.EmptyElements;
+using HtmlWebParser.Elements.InlineElements;
 using HtmlWebParser.Elements.Special;
 using System;
 using System.Collections.Generic;
-using HtmlWebParser.Elements.InlineElements;
 
 namespace HtmlWebParser.Entities
 {
@@ -40,35 +40,9 @@ namespace HtmlWebParser.Entities
         {
             switch (this.Name.Trim().ToLower())
             {
-                case "meta":
-                    return new Meta(this);
-
-                case "body":
-                    return new Body(this);
-
-                case "area":
-                    return new Area(this);
-
-                case "head":
-                    return new Head(this);
-
-                case "html":
-                    return new Html(this);
-
-                case "p":
-                    return new P(this);
-
-                case "strong":
-                    return new Strong(this);
-
-                case "a":
-                    return new A(this);
-
-                case "img":
-                    return new IMG(this);
-
-                case "title":
-                    return new Title(this);
+                /* Begin - Block Elements*/
+                case "div":
+                    return new Div(this);
 
                 case "h1":
                     return new H1(this);
@@ -88,11 +62,56 @@ namespace HtmlWebParser.Entities
                 case "h6":
                     return new H6(this);
 
-                case "ul":
-                    return new UL(this);
-
                 case "li":
                     return new LI(this);
+
+                case "main":
+                    return new Main(this);
+
+                case "nav":
+                    return new Nav(this);
+
+                case "p":
+                    return new P(this);
+
+                case "ul":
+                    return new UL(this);
+                /* End - Block Elements*/
+                /* Begin - Empty Elements*/
+
+                case "area":
+                    return new Area(this);
+
+                case "meta":
+                    return new Meta(this);
+                /* End - Empty Elements*/
+                /* Begin - Inline Elements*/
+
+                case "a":
+                    return new A(this);
+
+                case "img":
+                    return new IMG(this);
+
+                case "strong":
+                    return new Strong(this);
+                /* End - Inline Elements*/
+                /* Begin - Special Elements*/
+
+                case "body":
+                    return new Body(this);
+
+                case "head":
+                    return new Head(this);
+
+                case "html":
+                    return new Html(this);
+
+                case "title":
+                    return new Title(this);
+
+                /* End - Special Elements*/
+
                 default: return null;
             }
         }

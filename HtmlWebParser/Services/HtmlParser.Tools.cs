@@ -1,6 +1,5 @@
 ﻿using HtmlWebParser.Entities;
 using System;
-using System.Collections.Generic;
 
 namespace HtmlWebParser.Services
 {
@@ -276,19 +275,16 @@ namespace HtmlWebParser.Services
             return new Tuple<int, string>(index, propertyContent);
         }
 
-
         private Tuple<int, string> GetInBetweenContent(int index, int limit)
         {
             string propertyContent = "";
             index++;
             do
             {
-
                 char c = _content[index];
 
                 if (c.Equals('<'))
                 {
-
                     propertyContent = propertyContent.Trim().Replace("\r", string.Empty);
                     propertyContent = propertyContent.Trim().Replace("\n", string.Empty);
                     propertyContent = propertyContent.Replace(Environment.NewLine, string.Empty);
@@ -314,11 +310,6 @@ namespace HtmlWebParser.Services
             index--;
             return new Tuple<int, string>(index, propertyContent);
         }
-
-
-
-
-
 
         /// <summary>
         ///

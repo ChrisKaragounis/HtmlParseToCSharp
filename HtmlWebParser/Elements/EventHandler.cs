@@ -1,69 +1,69 @@
 ﻿namespace HtmlWebParser.Elements
 {
-    public abstract class EventHandler
+    public interface EventHandler
     {
-        public string onabort;
-        public string onautocomplete;
-        public string onautocompleteerror;
-        public string onblur;
-        public string oncancel;
-        public string oncanplay;
-        public string oncanplaythrough;
-        public string onchange;
-        public string onclick;
-        public string onclose;
-        public string oncontextmenu;
-        public string oncuechange;
-        public string ondblclick;
-        public string ondrag;
-        public string ondragend;
-        public string ondragenter;
-        public string ondragexit;
-        public string ondragleave;
-        public string ondragover;
-        public string ondragstart;
-        public string ondrop;
-        public string ondurationchange;
-        public string onemptied;
-        public string onended;
-        public string onerror;
-        public string onfocus;
-        public string oninput;
-        public string oninvalid;
-        public string onkeydown;
-        public string onkeypress;
-        public string onkeyup;
-        public string onload;
-        public string onloadeddata;
-        public string onloadedmetadata;
-        public string onloadstart;
-        public string onmousedown;
-        public string onmouseenter;
-        public string onmouseleave;
-        public string onmousemove;
-        public string onmouseout;
-        public string onmouseover;
-        public string onmouseup;
-        public string onmousewheel;
-        public string onpause;
-        public string onplay;
-        public string onplaying;
-        public string onprogress;
-        public string onratechange;
-        public string onreset;
-        public string onresize;
-        public string onscroll;
-        public string onseeked;
-        public string onseeking;
-        public string onselect;
-        public string onshow;
-        public string onsort;
-        public string onstalled;
-        public string onsubmit;
-        public string onsuspend;
-        public string ontimeupdate;
-        public string ontoggle;
-        public string onvolumechange;
-        public string onwaiting;
+        public string onabort { get; set; }
+        public string onautocomplete { get; set; }
+        public string onautocompleteerror { get; set; }
+        public string onblur { get; set; }
+        public string oncancel { get; set; }
+        public string oncanplay { get; set; }
+        public string oncanplaythrough { get; set; }
+        public string onchange { get; set; }
+        public string onclick { get; set; }
+        public string onclose { get; set; }
+        public string oncontextmenu { get; set; }
+        public string oncuechange { get; set; }
+        public string ondblclick { get; set; }
+        public string ondrag { get; set; }
+        public string ondragend { get; set; }
+        public string ondragenter { get; set; }
+        public string ondragexit { get; set; }
+        public string ondragleave { get; set; }
+        public string ondragover { get; set; }
+        public string ondragstart { get; set; }
+        public string ondrop { get; set; }
+        public string ondurationchange { get; set; }
+        public string onemptied { get; set; }
+        public string onended { get; set; }
+        public string onerror { get; set; }
+        public string onfocus { get; set; }
+        public string oninput { get; set; }
+        public string oninvalid { get; set; }
+        public string onkeydown { get; set; }
+        public string onkeypress { get; set; }
+        public string onkeyup { get; set; }
+        public string onload { get; set; }
+        public string onloadeddata { get; set; }
+        public string onloadedmetadata { get; set; }
+        public string onloadstart { get; set; }
+        public string onmousedown { get; set; }
+        public string onmouseenter { get; set; }
+        public string onmouseleave { get; set; }
+        public string onmousemove { get; set; }
+        public string onmouseout { get; set; }
+        public string onmouseover { get; set; }
+        public string onmouseup { get; set; }
+        public string onmousewheel { get; set; }
+        public string onpause { get; set; }
+        public string onplay { get; set; }
+        public string onplaying { get; set; }
+        public string onprogress { get; set; }
+        public string onratechange { get; set; }
+        public string onreset { get; set; }
+        public string onresize { get; set; }
+        public string onscroll { get; set; }
+        public string onseeked { get; set; }
+        public string onseeking { get; set; }
+        public string onselect { get; set; }
+        public string onshow { get; set; }
+        public string onsort { get; set; }
+        public string onstalled { get; set; }
+        public string onsubmit { get; set; }
+        public string onsuspend { get; set; }
+        public string ontimeupdate { get; set; }
+        public string ontoggle { get; set; }
+        public string onvolumechange { get; set; }
+        public string onwaiting { get; set; }
     }
 }

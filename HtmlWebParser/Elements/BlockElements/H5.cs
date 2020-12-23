@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using HtmlWebParser.Elements.WebAPIs;
+﻿using HtmlWebParser.Elements.WebAPIs;
 using HtmlWebParser.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace HtmlWebParser.Elements.BlockElements
 {
-    class H5 : HTMLHeadingElement
+    internal class H5 : HTMLHeadingElement
     {
         public new readonly string TagName = "h5";
 

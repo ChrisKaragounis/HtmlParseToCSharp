@@ -1,5 +1,7 @@
 ﻿using HtmlWebParser.Entities;
 using System.Collections.Generic;
+using HtmlWebParser.Elements;
+using HtmlWebParser.Elements.BlockElements;
 
 namespace DynamicAPI
 {
@@ -10,8 +12,18 @@ namespace DynamicAPI
         public List<HtmlObject> Content;                  //The Contents of the Container
         public List<HtmlObject> FollowingTags;      //Tags that exist following our Main Container Tag
 
-        public Locator(List<HtmlObject> PrecedingTags)
+        public Locator(Webpage _webpage)
         {
+            foreach (Element e in _webpage._elements)
+            {
+                if (e is Div div)
+                {
+                    if (div.id == "wpv-view-layout-262648")
+                    {
+                        int g = 2;
+                    }
+                }
+            }
         }
     }
 }

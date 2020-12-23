@@ -29,7 +29,7 @@ namespace HtmlWebParser.Services
                     tag.depth = depth;
                     //TODO: PROBABLY HAS SOME FALSE POSITIVES
                     //Check if what is following is a comment
-                    if (this.Content[i].Equals('!') && (this.Content[i+1] == '-' && this.Content[i + 2] == '-'))
+                    if (this.Content[i].Equals('!') && (this.Content[i + 1] == '-' && this.Content[i + 2] == '-'))
                     {
                         i += 2;//Skip the next two "--" characters
                         //We are in a comment OMG ESCAPE IMMEDIATELY
@@ -49,7 +49,6 @@ namespace HtmlWebParser.Services
                     }
                     if (Content[i].Equals('/'))
                     {
-
                         //Closing Tag
                         tag.type = HtmlObjectType.ClosingTag;
                         depth--;
@@ -83,7 +82,6 @@ namespace HtmlWebParser.Services
                                 propertyName += this.Content[i];
                                 if (propertyName.Equals("height"))
                                 {
-
                                 }
                                 i++;
                             } while (this.Content[i] != '=');   //Read the whole property name till =

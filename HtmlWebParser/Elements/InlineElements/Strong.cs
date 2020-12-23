@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HtmlWebParser.Entities;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
-using System.Text;
-using HtmlWebParser.Entities;
 
 namespace HtmlWebParser.Elements.InlineElements
 {
-    class Strong : HTMLElement
+    internal class Strong : HTMLElement
     {
         public new readonly string TagName = "strong";
 

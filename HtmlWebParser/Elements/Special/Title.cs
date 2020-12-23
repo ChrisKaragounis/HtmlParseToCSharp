@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using HtmlWebParser.Elements.WebAPIs;
+﻿using HtmlWebParser.Elements.WebAPIs;
 using HtmlWebParser.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace HtmlWebParser.Elements.Special
 {
-    class Title : HTMLTitleElement
+    internal class Title : HTMLTitleElement
     {
         public new readonly string TagName = "title";
 

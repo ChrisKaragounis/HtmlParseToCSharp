@@ -12,6 +12,7 @@ namespace HtmlWebParser.Elements.Special
         /// Color of text for hyperlinks when selected. This method is non-conforming, use CSS color property in conjunction with the :active pseudo-class instead.
         /// </summary>
         public string alink;
+        public readonly HtmlObjectType tagType = HtmlObjectType.SelfClosingTag;
 
         public Body(HtmlObject obj) : base(obj)
         {

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using HtmlWebParser.Elements.WebAPIs;
+﻿using HtmlWebParser.Elements.WebAPIs;
 using HtmlWebParser.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace HtmlWebParser.Elements.BlockElements
 {
-    class H3 : HTMLHeadingElement
+    internal class H3 : HTMLHeadingElement
     {
         public new readonly string TagName = "h3";
 

@@ -10,7 +10,7 @@ namespace HtmlWebParser.Elements.EmptyElements
         public string content;
         public string httpequiv;
         public string name;
-
+        public readonly HtmlObjectType tagType = HtmlObjectType.SelfClosingTag;
         public Meta(HtmlObject obj) : base(obj)
         {
             if (!obj.Name.Equals(this.TagName))

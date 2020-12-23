@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HtmlWebParser.Entities;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using HtmlWebParser.Entities;
 
 namespace HtmlWebParser.Elements.Special
 {
-    class Head : Element
+    internal class Head : Element
     {
         public new readonly string TagName = "head";
 
@@ -14,6 +11,7 @@ namespace HtmlWebParser.Elements.Special
         ///The URIs of one or more metadata profiles, separated by white space.
         /// </summary>
         public string profile;
+        public readonly HtmlObjectType tagType = HtmlObjectType.SelfClosingTag;
 
         public Head(HtmlObject obj) : base(obj)
         {

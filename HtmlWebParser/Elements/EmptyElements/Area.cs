@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HtmlWebParser.Entities;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using HtmlWebParser.Entities;
 
 namespace HtmlWebParser.Elements.EmptyElements
 {
-    class Area : Elements.Element
+    internal class Area : Elements.Element
     {
         public new readonly string TagName = "area";
 

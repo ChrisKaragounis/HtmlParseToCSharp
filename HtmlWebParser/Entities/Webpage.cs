@@ -9,7 +9,7 @@ namespace HtmlWebParser.Entities
 
     {
         private List<HtmlObject> _htmlObjectsList;
-        private List<Element> _elements;
+        public List<Element> _elements;
 
         private uint _depth = 0;
 
@@ -25,6 +25,7 @@ namespace HtmlWebParser.Entities
         }
 
         public int Count => _htmlObjectsList.Count;
+
         IEnumerator IEnumerable.GetEnumerator() => _htmlObjectsList.GetEnumerator();
 
         internal void Add(HtmlObject obj)
@@ -49,6 +50,5 @@ namespace HtmlWebParser.Entities
         {
             return _htmlObjectsList[i];
         }
-
     }
 }

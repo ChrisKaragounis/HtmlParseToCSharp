@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using HtmlWebParser.Entities;
+﻿using HtmlWebParser.Entities;
 
 namespace HtmlWebParser.Elements.WebAPIs
 {
